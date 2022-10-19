@@ -19,7 +19,7 @@ public class Students extends AbsTable{
 
     @Override
     public void insert() throws SQLException {
-        iDbExecutor.execute("INSERT Student (id, fio, sex, id_group))" +
+        iDbExecutor.execute(String.format("INSERT %s(%s, %s, %s, %s))" +
                 "VALUES (101, Перов Андрей Николаевич, male, 1)," +
                 " (111, Борщ Сметан Николаевич, male, 1), " +
                 "(202, Пепега Валентин Петрович, male, 1), " +
@@ -34,6 +34,28 @@ public class Students extends AbsTable{
                 "(607, Простова Анастасия Андреевна, female, 3), " +
                 "(707, Даркина Дарья Дмитриевна, female, 3), " +
                 "(777, Дробинкина Анастасия Дмитриевна, female, 3), " +
-                "(808, Валик Андрей Николаевич, male, 3)",false);
+                "(808, Валик Андрей Николаевич, male, 3)",getTableName(),ID,FIO,SEX,ID_GROUP),false);
+    }
+
+    @Override
+    public void allInfStudents() throws SQLException {
+        iDbExecutor.execute("select st.id, st.fio, st.sex, st.id_group, gr.id, cr.fio\n" +
+                "from Student as st\n" +
+                "JOIN Group as gr\n" +
+                "ON st.id_group = gr.id\n" +
+                "JOIN Curator as cr\n" +
+                "ON gr.id_curator = cr.id", false);
+    }
+
+    @Override
+    public void countStudent() throws SQLException{
+        iDbExecutor.execute("SELECT COUNT(fio) FROM Student",false);
+    }
+
+    @Override
+    public void femaleStudents() throws SQLException{
+        iDbExecutor.execute("SELECT *\n" +
+                "from Student\n" +
+                "where sex = 'female'",false);
     }
 }

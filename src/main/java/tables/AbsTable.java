@@ -35,4 +35,30 @@ public class AbsTable implements ITable {
     public void insert() throws SQLException {
         iDbExecutor.execute(String.format("INSERT INTO %s", this.tableName),false);
     }
+
+    @Override
+    public void allInfStudents() throws SQLException {
+        iDbExecutor.execute(String.format("Select %s", tableName),false);
+
+    }
+
+    @Override
+    public void countStudent() throws SQLException {
+        iDbExecutor.execute(String.format("Select %s", tableName),false);
+    }
+
+    @Override
+    public void femaleStudents() throws SQLException {
+        iDbExecutor.execute(String.format("Select %s", tableName),false);
+    }
+
+    @Override
+    public void updateGroupCurator() throws SQLException {
+        iDbExecutor.execute(String.format("Update %s",tableName),false);
+    }
+
+    @Override
+    public void curatorInGroups() throws SQLException {
+        iDbExecutor.execute(String.format("Select %s",tableName),false);
+    }
 }
